@@ -1,25 +1,23 @@
 //your code here
 // script.js
-let bandNames = ['The Beatles', 'Led Zeppelin', 'Pink Floyd', 'The Rolling Stones', 'The Who'];
+const bands = ['The Virupaksha Temple', 'Victoria Memorial', 'Tajmahal'];
 
-// Function to remove articles from band names
-function removeArticles(name) {
-  const articles = ['a', 'an', 'the'];
-  const words = name.split(' ');
-  const filteredWords = words.filter(word => !articles.includes(word.toLowerCase()));
-  return filteredWords.join(' ');
+// Define a function to strip out articles ('a', 'an', 'the') from band names
+function strip(bandName) {
+  return bandName.replace(/^(a |an |the )/i, '').trim();
 }
 
-// Sort the band names in lexicographic order excluding articles
-const sortedBandNames = bandNames.sort((a, b) => removeArticles(a).localeCompare(removeArticles(b)));
+// Sort the band names in lexicographic order
+const sortedBands = bands.sort((a, b) => strip(a) > strip(b) ? 1 : -1);
 
-// Display the sorted band names in a list
-const bandList = document.getElementById('band');
-sortedBandNames.forEach(name => {
+// Select the ul element
+const ul = document.querySelector('#bands');
+
+// Loop through the sorted bands and add them to the ul as li elements
+sortedBands.forEach(band => {
   const li = document.createElement('li');
-  const text = document.createTextNode(name);
-  li.appendChild(text);
-  bandList.appendChild(li);
+  li.textContent = band;
+  ul.appendChild(li);
 });
 
 
